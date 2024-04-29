@@ -1,0 +1,17 @@
+﻿<h3>TodoItemView</h3>
+
+@using BlazorApp1.Model.Entity
+
+<div class="card">
+    <div class="card-body">
+    <h3>@Todo.Description</h3>
+    @* <p>Is Completed: @TodoItem.IsCompleted</p> *@
+    @* <p>Due Date: @(TodoItem.DueDate.HasValue ? TodoItem.DueDate.Value.ToString("yyyy-MM-dd") : "No due date")</p> *@
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public TodoItem Todo { get; set; }
+}

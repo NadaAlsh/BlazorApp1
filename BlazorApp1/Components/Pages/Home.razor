@@ -1,0 +1,18 @@
+﻿@page "/"
+@using BlazorApp1.Model.Entity
+@using BlazorApp1.Components
+
+
+<TodoItemView Todo="@todo" />
+
+@code {
+    public TodoItem todo = new TodoItem
+        {
+            Id = 1,
+            Description = "Complete All Tasks",
+            IsCompleted = true,
+            DueDate = DateTime.Now.AddDays(3)
+        };
+}
+
+
