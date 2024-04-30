@@ -1,12 +1,20 @@
-﻿<h3>TodoItemView</h3>
+﻿@* <h3>To Do Item View</h3> *@
 
 @using BlazorApp1.Model.Entity
 
 <div class="card">
     <div class="card-body">
-    <h3>@Todo.Description</h3>
+    @* <h3>@Todo.Description</h3> *@
     @* <p>Is Completed: @TodoItem.IsCompleted</p> *@
     @* <p>Due Date: @(TodoItem.DueDate.HasValue ? TodoItem.DueDate.Value.ToString("yyyy-MM-dd") : "No due date")</p> *@
+    @if(Todo.IsCompleted)
+        {
+            <span style="text-decoration: line-through">@Todo.Description</span>
+        } else
+        {
+            @Todo.Description
+        }
+
     </div>
 </div>
 

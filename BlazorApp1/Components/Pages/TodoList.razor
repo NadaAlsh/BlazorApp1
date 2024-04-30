@@ -1,6 +1,9 @@
 ﻿@page "/todo"
-<h3>TodoList</h3>
+<h3>To Do List</h3>
 @using BlazorApp1.Model.Entity
+@using Microsoft.EntityFrameworkCore
+
+<button class="btn btn-primary" @onclick="OnAddTaskClicked">Create Todo</button>
 
 @foreach (var t in Items)
 {
@@ -10,14 +13,21 @@
 
 
 @code {
-        public List<TodoItem> Items { get; set; }
+    public List<TodoItem> Items { get; set; }
+    [Inject] public NavigationManager manager { get; set; }
+    [Inject] public IDbContextFactory<TodoDbContext> Factory { get; set; }
 
         protected override void OnInitialized()
         {
-            Items = new List<TodoItem>{
-                    new TodoItem{ Description = "Complete all Coded Assignments", IsCompleted = false, Id = 1, DueDate = new DateTime(2024,04,30)},
-                    new TodoItem{ Description = "Appartment Rent Paid", IsCompleted = true, Id = 2 },
-                    new TodoItem{ Description = "Clean My Room", IsCompleted = false, Id = 3 }
-        };
+            var db = Factory.CreateDbContext();
+            Items = db.Items.ToList();
+            // Items = new List<TodoItem>{
+            //         new TodoItem{ Description = "Complete all Coded Assignments", IsCompleted = false, Id = 1, DueDate = new DateTime(2024,04,30)},
+            //         new TodoItem{ Description = "Appartment Rent Paid", IsCompleted = true, Id = 2 },
+            //         new TodoItem{ Description = "Clean My Room", IsCompleted = false, Id = 3 }
+        }
+    public void OnAddTaskClicked()
+        {
+            manager.NavigateTo("/todo/create");
         }
 }

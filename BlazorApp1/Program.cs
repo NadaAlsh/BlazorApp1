@@ -1,4 +1,6 @@
 using BlazorApp1.Components;
+using BlazorApp1.Model.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorApp1
 {
@@ -11,7 +13,8 @@ namespace BlazorApp1
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
-
+            builder.Services.AddDbContextFactory<TodoDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
